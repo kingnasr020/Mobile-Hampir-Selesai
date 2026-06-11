@@ -26,22 +26,30 @@ class HeroCounterData {
 }
 
 class SubHero {
-  final int heroId; // KITA BALIKIN LAGI BIAR GAK MERAH
+  final int heroId;
+  final String name; 
   final String image;
   final double winRate;
   final double winRateIncrease;
 
   SubHero({
     required this.heroId,
+    required this.name,
     required this.image,
     required this.winRate,
     required this.winRateIncrease,
   });
 
   factory SubHero.fromJson(Map<String, dynamic> json) {
+    // FIX: Mengambil nama dari struktur API yang benar
+    // Coba ambil dari 'hero_name' atau 'hero' -> 'name'
+    final heroData = json['hero'] ?? {};
+    final heroInfo = heroData['data'] ?? {};
+    
     return SubHero(
-      heroId: json['heroid'] ?? 0, // AMBIL ID DARI JSON
-      image: json['hero']?['data']?['head'] ?? "",
+      heroId: json['heroid'] ?? 0,
+      name: heroInfo['name'] ?? json['hero_name'] ?? "UNKNOWN HERO",
+      image: heroInfo['head'] ?? "",
       winRate: (json['hero_win_rate'] as num).toDouble(),
       winRateIncrease: (json['increase_win_rate'] as num).toDouble(),
     );
