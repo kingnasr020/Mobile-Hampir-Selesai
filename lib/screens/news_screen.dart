@@ -27,6 +27,20 @@ class _NewsScreenState extends State<NewsScreen> {
     },
     {
       'id': 2,
+      'name': 'Kairi Official',
+      'role': '🗡️ The Jungler / Assassin God',
+      'subscribers': '2.1M+ Subscribers',
+      'excerpt':
+          'Mekanik jungler tingkat dewa dan rahasia rotasi super cepat ala ONIC Esports.',
+      'description':
+          'Kairi membagikan rahasia rotasi jungler super cepat, penguasaan hero assassin lincah seperti Ling, Hayabusa, dan Joy, serta cara mengamankan objektif Turtle/Lord dengan Retribution presisi.',
+      'avatar': '🗡️',
+      'image': 'assets/proplayer/kairi.jpg',
+      'isFeatured': false,
+      'url': 'https://youtube.com/@kairiplayz?si=PzV33nPM1zKxBwfn',
+    },
+    {
+      'id': 3,
       'name': 'RRQ Lemon',
       'role': '👽 The Alien / King of Versatility',
       'subscribers': '5.7M+ Subscribers',
@@ -40,26 +54,54 @@ class _NewsScreenState extends State<NewsScreen> {
       'url': 'https://www.youtube.com/@rrq_lemon',
     },
     {
-      'id': 3,
+      'id': 4,
+      'name': 'Sanz',
+      'role': '🧙‍♂️ Mid Laner / Kage',
+      'subscribers': '1.2M+ Subscribers',
+      'excerpt':
+          'Pakar Mid Lane dengan positioning dan perhitungan damage magic yang sangat akurat.',
+      'description':
+          'Gilang "Sanz" memberikan konten edukasi seputar penguasaan hero Mage, trik rotasi Midlane untuk back-up side lane, serta timing penggunaan skill ultimate yang bisa mengubah jalannya teamfight.',
+      'avatar': '🧙‍♂️',
+      'image': 'assets/proplayer/sanz.jpg',
+      'isFeatured': false,
+      'url': 'https://youtube.com/@sanzgilang10?si=9lm62Te_yoER29qM',
+    },
+    {
+      'id': 5,
       'name': 'Gustian REKT',
-      'role': '🏆 The Spine / M1 World Champion Kapten',
+      'role': '🏆 The Spine / M1 World Champion',
       'subscribers': '4.1M+ Subscribers',
       'excerpt':
-          'Kapten legendaris pembawa pulang trofi M1. Pakar utama dalam urusan shotcall makro dan manajemen laning super ketat.',
+          'Kapten legendaris pembawa pulang trofi M1. Pakar utama dalam urusan shotcall makro dan manajemen laning.',
       'description':
           'Gustian "REKT" adalah roamer dan goldlaner legendaris yang memiliki ketenangan luar biasa dalam mengambil keputusan makro game. Di YouTube-nya, REKT fokus menyajikan konten edukasi tingkat tinggi, mulai dari bedah draf pick tim MPL, trik melakukan zoning aman untuk core, manajemen gelombang minion (wave management), hingga cara membaca pergerakan jungler musuh secara presisi.',
       'avatar': '🏆',
       'image': 'assets/proplayer/gustian_rekt.jpg',
       'isFeatured': false,
-      'url': 'https://www.youtube.com/@GustianREKT',
+      'url': 'https://youtube.com/@GustianREKT?si=5JQV3X5X5X5X5X5X',
     },
     {
-      'id': 4,
+      'id': 6,
+      'name': 'XINNN',
+      'role': '🔫 Gold Laner Bar-Bar',
+      'subscribers': '3.8M+ Subscribers',
+      'excerpt':
+          'Mantan andalan RRQ dengan gaya main agresif, menguasai role Marksman dan Assassin.',
+      'description':
+          'Isaiah Omega "Xinnn" membagikan gameplay Gold Lane agresif, trik snowballing sejak early game, dan rahasia penempatan posisi Marksman saat late game agar tidak mudah di-pick off lawan.',
+      'avatar': '🔫',
+      'image': 'assets/proplayer/xinnn.jpg',
+      'isFeatured': false,
+      'url': 'https://www.youtube.com/@XINNN',
+    },
+    {
+      'id': 7,
       'name': 'Oura Store',
-      'role': '⚡ MVP M1 World Champion / Bapak Offlaner',
+      'role': '⚡ Bapak Offlaner',
       'subscribers': '7.9M+ Subscribers',
       'excerpt':
-          'EXP Laner terbaik dunia pada masanya yang menyabet gelar MVP M1 berkat dominasi lane dan kombo hero fighter tangguh.',
+          'EXP Laner terbaik dunia pada masanya yang menyabet gelar MVP M1 berkat dominasi lane.',
       'description':
           'Eko Julianto (Oura) merupakan panutan utama bagi para pemain EXP Lane di Indonesia. Konten YouTube-nya sangat direkomendasikan bagi kamu yang ingin mendalami tugas memutus formasi lini belakang musuh saat war, trik split push yang aman, memenangkan duel mekanik 1v1 di side lane, serta cara menjaga kestabilan ekonomi gold tim.',
       'avatar': '⚡',
@@ -220,7 +262,7 @@ class _FeaturedPlayerWidget extends StatelessWidget {
                             style: const TextStyle(fontSize: 55),
                           ),
                         );
-                      }, // FIX: Menggunakan tanda koma di sini, bukan titik koma
+                      },
                     ),
                   ),
                 ),
@@ -380,7 +422,7 @@ class _PlayerCardWidget extends StatelessWidget {
                           style: const TextStyle(fontSize: 30),
                         ),
                       );
-                    }, // FIX: Menggunakan tanda koma di sini, bukan titik koma
+                    },
                   ),
                 ),
               ),

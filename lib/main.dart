@@ -1,7 +1,8 @@
-import 'dart:io'; // WAJIB TAMBAHAN: Untuk mengaktifkan HttpOverrides jaringan
+import 'dart:io';
+import 'package:flutter/foundation.dart'; // Wajib untuk mendeteksi Web/HP
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:esportspulse/screens/login_screen.dart';
-
 
 // Class pembantu untuk mengabaikan batasan sertifikasi keamanan lokal/regional luar
 class MyHttpOverrides extends HttpOverrides {
@@ -12,11 +13,24 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() {
-  // Mengaktifkan bypass konfigurasi jaringan sebelum aplikasi Flutter rendering
-  HttpOverrides.global = MyHttpOverrides();
-  
+Future<void> main() async {
+  // Wajib dipanggil untuk inisialisasi binding Flutter sebelum async
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Mengaktifkan bypass konfigurasi jaringan (hanya jika dijalankan di perangkat asli/bukan web)
+  if (!kIsWeb) {
+    HttpOverrides.global = MyHttpOverrides();
+  }
+  
+  // Memuat file .env dari folder assets dengan sistem pengaman
+  try {
+    await dotenv.load(fileName: "assets/.env");
+    debugPrint("✅ SUKSES: File .env berhasil dimuat!");
+  } catch (e) {
+    debugPrint("❌ BAHAYA: File .env GAGAL dimuat! Error: $e");
+    // Walau error, aplikasi akan dipaksa lanjut agar tidak stuck di logo
+  }
+  
   runApp(const EsportsPulseApp());
 }
 

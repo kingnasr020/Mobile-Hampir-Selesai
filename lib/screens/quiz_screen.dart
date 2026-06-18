@@ -314,32 +314,45 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Widget _buildLevelPicker() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text("MPL ID SEASON 17",
-              style: TextStyle(
-                  color: Color(0xFF102A43),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 4)),
-          const Text("CHALLENGE",
-              style: TextStyle(
-                  color: Color(0xFF102A43),
-                  fontSize: 42,
-                  fontWeight: FontWeight.w900)),
-          const SizedBox(height: 40),
-          _levelCard("INITIATE", "Level: Easy", 1, Colors.blue),
-          _levelCard("ELITE", "Level: Medium", 2, Colors.indigo),
-          _levelCard("GLORY", "Level: Hard", 3, const Color(0xFFD9480F)),
-          const SizedBox(height: 30),
-          const Text("Pilih rank kuis kamu Nas!",
-              style: TextStyle(
-                  color: Colors.blueGrey, fontStyle: FontStyle.italic)),
-        ],
-      ),
+    return Stack(
+      children: [
+        // TAMBAHAN: Tombol Back biar aman pas demo
+        Positioned(
+          top: 8,
+          left: 16,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Color(0xFF102A43)),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("MPL ID SEASON 17",
+                  style: TextStyle(
+                      color: Color(0xFF102A43),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 4)),
+              const Text("CHALLENGE",
+                  style: TextStyle(
+                      color: Color(0xFF102A43),
+                      fontSize: 42,
+                      fontWeight: FontWeight.w900)),
+              const SizedBox(height: 40),
+              _levelCard("INITIATE", "Level: Easy", 1, Colors.blue),
+              _levelCard("ELITE", "Level: Medium", 2, Colors.indigo),
+              _levelCard("GLORY", "Level: Hard", 3, const Color(0xFFD9480F)),
+              const SizedBox(height: 30),
+              const Text("Pilih rank kuis kamu Nas!",
+                  style: TextStyle(
+                      color: Colors.blueGrey, fontStyle: FontStyle.italic)),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -402,7 +415,6 @@ class _QuizScreenState extends State<QuizScreen> {
                       : const Color(0xFF102A43),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                // FIX: Menghilangkan huruf 's' di variabel _secondsLeft
                 child: Text("$_secondsLeft",
                     style: const TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
@@ -533,24 +545,20 @@ class _QuizScreenState extends State<QuizScreen> {
 
                 if (_score >= 80) {
                   await db.addCoins(20);
-
                   int coinNow = await db.getCoins();
-                  print("COIN SETELAH +20 = $coinNow");
+                  debugPrint("COIN SETELAH +20 = $coinNow");
                 } else if (_score >= 50) {
                   await db.addCoins(10);
-
                   int coinNow = await db.getCoins();
-                  print("COIN SETELAH +10 = $coinNow");
+                  debugPrint("COIN SETELAH +10 = $coinNow");
                 } else {
                   await db.addCoins(5);
-
                   int coinNow = await db.getCoins();
-                  print("COIN SETELAH +5 = $coinNow");
+                  debugPrint("COIN SETELAH +5 = $coinNow");
                 }
 
                 if (context.mounted) {
                   int reward = 5;
-
                   if (_score >= 80) {
                     reward = 20;
                   } else if (_score >= 50) {
@@ -560,25 +568,15 @@ class _QuizScreenState extends State<QuizScreen> {
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                      title: const Text(
-                        "Selamat!",
-                      ),
-                      content: Text(
-                        "Anda mendapatkan $reward coin",
-                      ),
+                      title: const Text("Selamat!"),
+                      content: Text("Anda mendapatkan $reward coin"),
                       actions: [
                         TextButton(
                           onPressed: () {
-                            Navigator.pop(context);
-
-                            Navigator.pop(
-                              context,
-                              true,
-                            );
+                            Navigator.pop(context); // Tutup dialog
+                            Navigator.pop(context, true); // Balik ke halaman sebelumnya sambil bawa nilai update koin
                           },
-                          child: const Text(
-                            "OK",
-                          ),
+                          child: const Text("OK", style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
